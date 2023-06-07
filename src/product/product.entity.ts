@@ -1,13 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-// import { Link } from './link.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { LinkEntity } from './link.entity';
 
 @Entity()
 export class ProductEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @OneToMany(() => Link, (link) => link.product)
-  // links: Link[];
+  @OneToMany(() => LinkEntity, (link) => link.product)
+  links: LinkEntity[];
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createTime: Date;

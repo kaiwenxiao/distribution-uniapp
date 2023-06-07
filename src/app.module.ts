@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProductModule } from './product/product.module';
+import { ProductEntity } from './product/product.entity';
+import { LinkEntity } from './product/link.entity';
 
 @Module({
   imports: [
@@ -21,8 +23,10 @@ import { ProductModule } from './product/product.module';
         username: configService.get('DB_USER', 'root'),
         password: configService.get('DB_PASSWORD', 'root'),
         timezone: '+08:00',
+        entities: [ProductEntity, LinkEntity],
         synchronize: true,
-        autoLoadEntities: true,
+        // dropSchema: true,
+        // autoLoadEntities: true,
       }),
     }),
     ProductModule,
